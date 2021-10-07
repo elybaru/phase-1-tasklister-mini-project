@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     buildToDo(input.value)
     form.reset()
     // console.log(input.value)
+    let sortButton = document.getElementById('sort-button')
+    sortButton.addEventListener('click', sortTasks)
   })
 });
 
@@ -25,15 +27,24 @@ function buildToDo(todo) {
   const prioritySelect = document.querySelector("#priority")
   switch (prioritySelect.value) {
     case 'high':
-      p.style.color = 'red';
+      p.className = 'red';
       break
     case 'medium':
-      p.style.color = 'gold'
+      p.className = 'gold';
       break
     case 'low':
-      p.style.color = 'green'
+      p.className = 'green';
       break
   }
+
+}
+
+function sortTasks() {
+  let arr = []
+  arr = [...document.querySelectorAll('p.red'), ...document.querySelectorAll('p.gold'), ...document.querySelectorAll('p.green')]
+  // console.log(arr)
+  // debugger
+  arr.map(p => document.querySelector('#tasks').appendChild(p))
 
 }
 
